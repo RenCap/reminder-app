@@ -1,5 +1,5 @@
-export const TaskDetails = (prop) => {
-    const task = prop.task;
+export const TaskDetails = (props) => {
+    const task = props.task;
     return (
         <>
             <h1>{task.name}</h1>

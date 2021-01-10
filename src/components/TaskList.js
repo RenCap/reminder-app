@@ -1,7 +1,11 @@
+import {useState} from 'react';
+
 import {TaskDetails} from "./TaskDetails";
 
-export const TaskList = () => {
-    // TODO remove mock
+export const TaskList = (props) => {
+    let [selectedTask, setSelectedTask] = useState({name: '', description: ''});
+
+    // TODO replace mock using hook
     const tasks = [
         {
             _id: 1,
@@ -20,14 +24,22 @@ export const TaskList = () => {
         }
     ]
 
+    const selectTask = (taskId) => {
+        setSelectedTask(tasks.find(task => task._id === taskId))
+    }
+
     return (
         <>
             <ul>
                 {tasks.map(task =>
-                    <li key={task._id}> {task.name}</li>
+                    <li key={task._id}>
+                        <button onClick={() => selectTask(task._id)}>
+                            {task.name}
+                        </button>
+                    </li>
                 )}
             </ul>
-            <TaskDetails task={tasks[0]}/>
+            <TaskDetails task={selectedTask}/>
         </>
     );
 }
