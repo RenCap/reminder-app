@@ -1,9 +1,13 @@
+import {Card, CardContent, CardHeader} from "@material-ui/core";
+
 export const TaskDetails = (props) => {
     const task = props.task;
-    return (
-        <>
-            <h1>{task.name}</h1>
-            <p>{task.description}</p>
-        </>
-    );
-}
+
+    const taskCard =
+        <Card>
+            <CardHeader title={task.name}/>
+            <CardContent>{task.description}</CardContent>
+        </Card>;
+
+    return <>{task._id && taskCard}</>;
+};
