@@ -7,8 +7,6 @@ import {SelectableList} from "./SelectableList";
 
 export const ReminderList = (props) => {
     const [activeReminder, setActiveReminder] = useState({});
-
-    // TODO replace mock using hook
     const {reminders} = useReminders();
 
     return (
@@ -21,7 +19,7 @@ export const ReminderList = (props) => {
                                 onSelect={reminder => setActiveReminder(reminder)}/>
             </Grid>
             <Grid item xs={8}>
-                {activeReminder._id ? <TaskList reminderId={reminders[0]._id}/> : <></>}
+                {activeReminder._id ? <TaskList reminderId={activeReminder._id}/> : <></>}
             </Grid>
         </Grid>
     );
