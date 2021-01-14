@@ -1,10 +1,11 @@
 import {useState} from 'react';
-import {Card, CardContent, CardHeader, Grid, List, ListItem, ListItemText} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 
 import {TaskDetails} from "./TaskDetails";
+import {SelectableList} from "./SelectableList";
 
 export const TaskList = (props) => {
-    const [selectedTask, setSelectedTask] = useState({});
+    const [activeTask, setActiveTask] = useState({});
 
     // TODO replace mock using hook
     // let reminderId = props.reminderId;
@@ -26,28 +27,17 @@ export const TaskList = (props) => {
         }
     ];
 
-    const selectTask = (taskId) => {
-        setSelectedTask(tasks.find(task => task._id === taskId));
-    };
-
     return (
         <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={2}>
             <Grid item xs={6}>
-                <Card>
-                    <CardHeader title={'Tasks'}/>
-                    <CardContent>
-                        <List>
-                            {tasks.map(task =>
-                                <ListItem button selected={task._id === selectedTask._id} key={task._id} onClick={() => selectTask(task._id)}>
-                                    <ListItemText primary={task.name}/>
-                                </ListItem>
-                            )}
-                        </List>
-                    </CardContent>
-                </Card>
+                <SelectableList title={'Tasks'}
+                                items={tasks}
+                                idSelector={task => task._id}
+                                labelSelector={task => task.name}
+                                onSelect={task => setActiveTask(task)}/>
             </Grid>
             <Grid item xs={6}>
-                <TaskDetails task={selectedTask}/>
+                <TaskDetails task={activeTask}/>
             </Grid>
         </Grid>
     );
