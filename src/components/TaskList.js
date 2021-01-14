@@ -6,8 +6,7 @@ import {TaskDetails} from "./TaskDetails";
 import {SelectableList} from "./SelectableList";
 
 export const TaskList = (props) => {
-    const [activeTask, setActiveTask] = useState({});
-    const {tasks} = useTasks(props.reminderId);
+    const {tasks, activeTask, setActiveTask} = useTasks(props.reminderId);
 
     return (
         <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={2}>
@@ -16,7 +15,8 @@ export const TaskList = (props) => {
                                 items={tasks}
                                 idSelector={task => task._id}
                                 labelSelector={task => task.name}
-                                onSelect={task => setActiveTask(task)}/>
+                                onSelect={task => setActiveTask(task)}
+                                selectedItem={activeTask}/>
             </Grid>
             <Grid item xs={6}>
                 <TaskDetails task={activeTask}/>

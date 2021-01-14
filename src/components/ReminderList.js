@@ -16,7 +16,8 @@ export const ReminderList = (props) => {
                                 items={reminders}
                                 idSelector={reminder => reminder._id}
                                 labelSelector={reminder => reminder.name}
-                                onSelect={reminder => setActiveReminder(reminder)}/>
+                                onSelect={reminder => setActiveReminder(reminder)}
+                                selectedItem={activeReminder}/>
             </Grid>
             <Grid item xs={8}>
                 {activeReminder._id ? <TaskList reminderId={activeReminder._id}/> : <></>}

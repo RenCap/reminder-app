@@ -7,11 +7,11 @@ export const useReminders = () => {
     const [key, setKey] = useState(0);
 
     useEffect(() => {
-        const fetchReminders = async () => {
+        // Fetch reminders
+        (async () => {
             const data = await reminderService.getReminders();
             setReminders(data);
-        };
-        fetchReminders();
+        })();
     }, [key]);
 
     return {reminders};
