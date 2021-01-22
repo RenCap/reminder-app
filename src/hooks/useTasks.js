@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 
 import * as taskService from "../services/taskService";
 
-export const useTasks = (reminderId) => {
+export const useTasks = reminderId => {
     const [tasks, setTasks] = useState([]);
     const [activeTask, setActiveTask] = useState({});
     const [key, setKey] = useState(0);
@@ -10,8 +10,12 @@ export const useTasks = (reminderId) => {
     useEffect(() => {
         // Fetch tasks
         (async () => {
-            const data = await taskService.getTasks(reminderId);
-            setTasks(data);
+            try {
+                const data = await taskService.getTasks(reminderId);
+                setTasks(data);
+            } catch (e) {
+                console.error('An error occurred while retrieving the tasks.');
+            }
         })();
     }, [key, reminderId]);
 

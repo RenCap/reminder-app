@@ -1,11 +1,5 @@
-export const getTasks = async (reminderId) => {
-    const response = await fetch(`http://localhost:8080/api/reminders/${reminderId}/tasks`, {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    });
+import {fetchData} from "./utils/fetchUtil";
 
-    if (response.ok) {
-        return await response.json();
-    }
-    throw Error("Error : Can't load tasks");
+export const getTasks = async reminderId => {
+    return fetchData(`http://localhost:8080/api/reminders/${reminderId}/tasks`, 'GET');
 };
