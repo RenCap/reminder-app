@@ -4,7 +4,7 @@ export const fetchData = async (uri, method, body) => {
         headers: {'Content-Type': 'application/json'}
     };
     if (!!body) {
-        options.body = body;
+        options.body = JSON.stringify(body);
     }
 
     const response = await fetch(uri, options);

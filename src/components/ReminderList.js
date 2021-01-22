@@ -1,5 +1,5 @@
 import {Grid} from "@material-ui/core";
-import {defaultTo} from "ramda";
+import {clone, defaultTo} from "ramda";
 
 import {useReminders} from "../hooks/useReminders";
 import {TaskList} from "./TaskList";
@@ -9,24 +9,26 @@ import {DeleteReminder} from "./dialog/DeleteReminder";
 import {AddUpdateReminder} from "./dialog/AddUpdateReminder";
 import {useDialog} from "../hooks/useDialog";
 
-export const ReminderList = props => {
+export const ReminderList = () => {
     const {reminders, activeReminder, setActiveReminder, addReminder, updateReminder, deleteReminder} = useReminders();
-    const {open, openDialog, closeDialog, action} = useDialog();
+    const {open, openDialog, closeDialog, action, item, setItem, submitDisabled, disableSubmit} = useDialog();
 
     const actions = {
         'add': {
             title: 'Create a reminder',
             onSubmit: async () => {
-                console.log('ADD');
+                await addReminder(item);
+                closeDialog();
             },
-            template: <AddUpdateReminder/>
+            template: <AddUpdateReminder reminder={item} onChange={setItem} disableSubmit={disableSubmit}/>
         },
         'update': {
             title: 'Edit the reminder',
             onSubmit: async () => {
-                console.log('EDIT');
+                await updateReminder(item);
+                closeDialog();
             },
-            template: <AddUpdateReminder reminder={activeReminder}/>
+            template: <AddUpdateReminder reminder={item} onChange={setItem} disableSubmit={disableSubmit}/>
         },
         'delete': {
             title: 'Delete the reminder',
@@ -56,7 +58,7 @@ export const ReminderList = props => {
                                     selectedItem={activeReminder}
                                     onSelect={reminder => setActiveReminder(reminder)}
                                     onAddItem={() => openDialog('add')}
-                                    onEditItem={() => openDialog('update')}
+                                    onEditItem={() => openDialog('update', clone(activeReminder))}
                                     onDeleteItem={() => openDialog('delete')}
                     />
                 </Grid>
@@ -67,7 +69,8 @@ export const ReminderList = props => {
             <GenericDialog open={open}
                            title={getActionOrDefault().title}
                            onCloseDialog={() => closeDialog()}
-                           onConfirmDialog={getActionOrDefault().onSubmit}>
+                           onConfirmDialog={getActionOrDefault().onSubmit}
+                           submitDisabled={submitDisabled}>
                 {getActionOrDefault().template}
             </GenericDialog>
         </>

@@ -13,7 +13,7 @@ export const GenericDialog = props => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => handleClose()}>Cancel</Button>
-                <Button onClick={() => handleSubmit()}>Submit</Button>
+                <Button disabled={props.submitDisabled} onClick={() => handleSubmit()}>Submit</Button>
             </DialogActions>
         </Dialog>
     );

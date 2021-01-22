@@ -22,8 +22,8 @@ export const useReminders = () => {
 
     const addReminder = async reminder => {
         try {
-            await reminderService.addReminder(reminder);
-            setActiveReminder({});
+            const result = await reminderService.addReminder(reminder);
+            setActiveReminder(result);
         } catch (e) {
             console.error('An error occurred while adding the reminders.');
         }
@@ -32,8 +32,8 @@ export const useReminders = () => {
 
     const updateReminder = async reminder => {
         try {
-            await reminderService.updateReminder(reminder);
-            setActiveReminder({});
+            const result = await reminderService.updateReminder(reminder);
+            setActiveReminder(result);
         } catch (e) {
             console.error('An error occurred while updating the reminders.');
         }
