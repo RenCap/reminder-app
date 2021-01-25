@@ -1,19 +1,16 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@material-ui/core";
 
-export const GenericDialog = props => {
-
-    const handleClose = props.onCloseDialog;
-    const handleSubmit = props.onConfirmDialog;
+export const GenericDialog = ({children, onCloseDialog, onConfirmDialog, open, submitDisabled, title}) => {
 
     return (
-        <Dialog open={props.open}>
-            <DialogTitle>{props.title}</DialogTitle>
+        <Dialog open={open}>
+            <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                {props.children}
+                {children}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => handleClose()}>Cancel</Button>
-                <Button disabled={props.submitDisabled} onClick={() => handleSubmit()}>Submit</Button>
+                <Button onClick={onCloseDialog}>Cancel</Button>
+                <Button disabled={submitDisabled} onClick={onConfirmDialog}>Submit</Button>
             </DialogActions>
         </Dialog>
     );

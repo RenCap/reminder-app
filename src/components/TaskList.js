@@ -4,8 +4,8 @@ import {useTasks} from "../hooks/useTasks";
 import {TaskDetails} from "./TaskDetails";
 import {SelectableList} from "./SelectableList";
 
-export const TaskList = props => {
-    const {tasks, activeTask, setActiveTask} = useTasks(props.reminderId);
+export const TaskList = ({reminderId}) => {
+    const {tasks, activeTask, setActiveTask} = useTasks(reminderId);
 
     const onAddTask = () => {
         // TODO

@@ -7,7 +7,7 @@ export const useDialog = () => {
     const [item, setItem] = useState({});
     const [submitDisabled, disableSubmit] = useState(true);
 
-    const openDialog = (action, value) => {
+    const openDialog = (action, value) => () => {
         setAction(action);
         setItem(value);
         disableSubmit(!equals('delete', action));
