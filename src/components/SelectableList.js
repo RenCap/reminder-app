@@ -1,3 +1,4 @@
+import * as PropTypes from "prop-types";
 import {
     Card,
     CardActions,
@@ -10,17 +11,17 @@ import {
     ListItemText
 } from "@material-ui/core";
 
-export const SelectableList = ({
-                                   idSelector,
-                                   items,
-                                   labelSelector,
-                                   onAddItem,
-                                   onDeleteItem,
-                                   onEditItem,
-                                   onSelect,
-                                   selectedItem,
-                                   title
-                               }) => {
+const SelectableList = ({
+                            idSelector,
+                            items,
+                            labelSelector,
+                            onAddItem,
+                            onDeleteItem,
+                            onEditItem,
+                            onSelect,
+                            selectedItem,
+                            title
+                        }) => {
 
     const selectItem = item => () => {
         onSelect(item);
@@ -57,3 +58,17 @@ export const SelectableList = ({
         </Card>
     );
 };
+
+SelectableList.propTypes = {
+    idSelector: PropTypes.func,
+    items: PropTypes.array,
+    labelSelector: PropTypes.func,
+    onAddItem: PropTypes.func,
+    onDeleteItem: PropTypes.func,
+    onEditItem: PropTypes.func,
+    onSelect: PropTypes.func,
+    selectedItem: PropTypes.object,
+    title: PropTypes.string
+};
+
+export default SelectableList;

@@ -1,8 +1,9 @@
+import {useState} from "react";
+import * as PropTypes from "prop-types";
 import {TextField} from "@material-ui/core";
 import {isEmpty, mergeRight, propOr} from "ramda";
-import {useState} from "react";
 
-export const SaveReminder = ({disableSubmit, onChange, reminder}) => {
+const SaveReminder = ({disableSubmit, onChange, reminder}) => {
     const [error, setError] = useState(false);
 
     const handleChangeName = event => {
@@ -21,3 +22,14 @@ export const SaveReminder = ({disableSubmit, onChange, reminder}) => {
         </form>
     );
 };
+
+SaveReminder.propTypes = {
+    disableSubmit: PropTypes.func,
+    onChange: PropTypes.func,
+    reminder: PropTypes.shape({
+        _id: PropTypes.string,
+        name: PropTypes.string
+    })
+};
+
+export default SaveReminder;

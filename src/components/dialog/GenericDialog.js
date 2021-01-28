@@ -1,6 +1,7 @@
+import * as PropTypes from "prop-types";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@material-ui/core";
 
-export const GenericDialog = ({children, onCloseDialog, onConfirmDialog, open, submitDisabled, title}) => {
+const GenericDialog = ({children, onCloseDialog, onConfirmDialog, open, submitDisabled, title}) => {
 
     return (
         <Dialog open={open}>
@@ -15,3 +16,14 @@ export const GenericDialog = ({children, onCloseDialog, onConfirmDialog, open, s
         </Dialog>
     );
 };
+
+GenericDialog.propTypes = {
+    children: PropTypes.any,
+    onCloseDialog: PropTypes.func,
+    onConfirmDialog: PropTypes.func,
+    open: PropTypes.bool,
+    submitDisabled: PropTypes.bool,
+    title: PropTypes.string
+};
+
+export default GenericDialog;

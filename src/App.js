@@ -1,6 +1,6 @@
 import './App.css';
-import {ReminderList} from "./components/ReminderList";
-import {GlobalSnackbar} from "./components/GlobalSnackbar";
+import ReminderList from "./components/ReminderList";
+import GlobalSnackbar from "./components/GlobalSnackbar";
 
 function App() {
     return (

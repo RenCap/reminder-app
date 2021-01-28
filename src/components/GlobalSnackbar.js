@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {clearSnackbar} from "../redux/snackbarActions";
 
-export const GlobalSnackbar = () => {
+const GlobalSnackbar = () => {
     const dispatch = useDispatch();
     const {open, message, severity} = useSelector(state => state.snackbar);
 
@@ -19,3 +19,5 @@ export const GlobalSnackbar = () => {
         </Alert>
     </Snackbar>;
 };
+
+export default GlobalSnackbar;

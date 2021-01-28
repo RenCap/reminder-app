@@ -2,14 +2,14 @@ import {Grid} from "@material-ui/core";
 import {clone, prop, propOr} from "ramda";
 
 import {useReminders} from "../hooks/useReminders";
-import {TaskList} from "./TaskList";
-import {SelectableList} from "./SelectableList";
-import {GenericDialog} from "./dialog/GenericDialog";
-import {DeleteReminder} from "./dialog/DeleteReminder";
-import {SaveReminder} from "./dialog/SaveReminder";
 import {useDialog} from "../hooks/useDialog";
+import TaskList from "./TaskList";
+import SelectableList from "./SelectableList";
+import GenericDialog from "./dialog/GenericDialog";
+import DeleteReminder from "./dialog/DeleteReminder";
+import SaveReminder from "./dialog/SaveReminder";
 
-export const ReminderList = () => {
+const ReminderList = () => {
     const {reminders, activeReminder, setActiveReminder, addReminder, updateReminder, deleteReminder} = useReminders();
     const {open, openDialog, closeDialog, action, item, setItem, submitDisabled, disableSubmit} = useDialog();
 
@@ -69,3 +69,5 @@ export const ReminderList = () => {
         </>
     );
 };
+
+export default ReminderList;
