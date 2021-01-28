@@ -6,7 +6,7 @@ import {useDialog} from "../hooks/useDialog";
 import TaskList from "./TaskList";
 import SelectableList from "./SelectableList";
 import GenericDialog from "./dialog/GenericDialog";
-import DeleteReminder from "./dialog/DeleteReminder";
+import DeleteItem from "./dialog/DeleteItem";
 import SaveReminder from "./dialog/SaveReminder";
 
 const ReminderList = () => {
@@ -36,7 +36,7 @@ const ReminderList = () => {
                 await deleteReminder();
                 closeDialog();
             },
-            template: <DeleteReminder reminderName={activeReminder.name}/>
+            template: <DeleteItem type={'reminder'} name={activeReminder.name}/>
         }
     };
 

@@ -17,7 +17,7 @@ const SaveReminder = ({disableSubmit, onChange, reminder}) => {
 
     return (
         <form>
-            <TextField required variant={"outlined"} error={error} label={'Name'} value={propOr('', 'name', reminder)}
+            <TextField required error={error} label={'Name'} value={propOr('', 'name', reminder)}
                        onChange={handleChangeName}/>
         </form>
     );
