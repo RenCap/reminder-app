@@ -2,11 +2,16 @@ import {useEffect, useState} from "react";
 import {inc} from "ramda";
 
 import * as reminderService from '../services/reminderService';
+import {useDispatch} from "react-redux";
+import {showErrorSnackbar, showSuccessSnackbar} from "../redux/snackbarActions";
 
 export const useReminders = () => {
     const [activeReminder, setActiveReminder] = useState({});
     const [reminders, setReminders] = useState([]);
     const [key, setKey] = useState(0);
+
+    // Redux dispatch for snackbar
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // Fetch reminders
@@ -15,17 +20,18 @@ export const useReminders = () => {
                 const data = await reminderService.getReminders();
                 setReminders(data);
             } catch (e) {
-                console.error('An error occurred while retrieving the reminders.');
+                dispatch(showErrorSnackbar('An error occurred while retrieving the reminders.'));
             }
         })();
-    }, [key]);
+    }, [key, dispatch]);
 
     const addReminder = async reminder => {
         try {
             const result = await reminderService.addReminder(reminder);
             setActiveReminder(result);
+            dispatch(showSuccessSnackbar('Reminder added successfully'));
         } catch (e) {
-            console.error('An error occurred while adding the reminders.');
+            dispatch(showErrorSnackbar('An error occurred while adding the reminder.'));
         }
         setKey(inc(key));
     };
@@ -34,8 +40,9 @@ export const useReminders = () => {
         try {
             const result = await reminderService.updateReminder(reminder);
             setActiveReminder(result);
+            dispatch(showSuccessSnackbar('Reminder updated successfully.'));
         } catch (e) {
-            console.error('An error occurred while updating the reminders.');
+            dispatch(showErrorSnackbar('An error occurred while updating the reminder.'));
         }
         setKey(inc(key));
     };
@@ -44,8 +51,9 @@ export const useReminders = () => {
         try {
             await reminderService.deleteReminder(activeReminder);
             setActiveReminder({});
+            dispatch(showSuccessSnackbar('Reminder removed successfully.'));
         } catch (e) {
-            console.error('An error occurred while deleting the reminders.');
+            dispatch(showErrorSnackbar('An error occurred while deleting the reminder.'));
         }
         setKey(inc(key));
     };
