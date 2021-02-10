@@ -1,11 +1,17 @@
-export const getReminders = async () => {
-    const response = await fetch('http://localhost:8080/api/reminders', {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    });
+import {fetchData} from "./utils/fetchUtil";
 
-    if (response.ok) {
-        return await response.json();
-    }
-    throw Error("Error : Can't load reminders");
+export const getReminders = async () => {
+    return fetchData('reminders', 'GET');
+};
+
+export const addReminder = async reminder => {
+    return fetchData('reminders', 'POST', reminder);
+};
+
+export const updateReminder = async reminder => {
+    return fetchData(`reminders/${reminder._id}`, 'PUT', reminder);
+};
+
+export const deleteReminder = async reminder => {
+    return fetchData(`reminders/${reminder._id}`, 'DELETE');
 };

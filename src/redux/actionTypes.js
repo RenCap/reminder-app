@@ -1,0 +1,3 @@
+export const SNACKBAR_SUCCESS = 'SHOW_SUCCESS';
+export const SNACKBAR_ERROR = 'SHOW_ERROR';
+export const SNACKBAR_CLEAR = 'CLOSE_SNACKBAR';
